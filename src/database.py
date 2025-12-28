@@ -4,16 +4,13 @@ from src.config import DB_PATH
 
 class VectorDB:
     def __init__(self):
-        # 初始化持久化客户端
         self.client = chromadb.PersistentClient(path=DB_PATH)
-        
-        # 论文集合 (使用 Cosine 距离)
+
         self.paper_collection = self.client.get_or_create_collection(
             name="papers",
             metadata={"hnsw:space": "cosine"}
         )
-        
-        # 图像集合
+
         self.image_collection = self.client.get_or_create_collection(
             name="images",
             metadata={"hnsw:space": "cosine"}

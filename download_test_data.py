@@ -1,16 +1,14 @@
 import os
 import requests
 import time
-import json  # 新增
+import json 
 
-# =================配置区域=================
 BASE_DIR = "/amax/home/dywang/course_work/Multimodal/LocalAI_Agent"
 DOWNLOAD_DIR = os.path.join(BASE_DIR, "test_downloads")
 PDF_DIR = os.path.join(DOWNLOAD_DIR, "raw_pdfs")
 IMG_DIR = os.path.join(DOWNLOAD_DIR, "raw_images")
-GT_FILE = os.path.join(DOWNLOAD_DIR, "ground_truth.json") # 新增：真实标签文件路径
+GT_FILE = os.path.join(DOWNLOAD_DIR, "ground_truth.json") 
 
-# ================= 论文列表 (已替换 4 篇易错论文) =================
 PAPERS = [
     # ==================== Reinforcement Learning (7篇) ====================
     ("Playing Atari with Deep Reinforcement Learning (DQN)", "1312.5602", "Reinforcement Learning"),
@@ -68,7 +66,6 @@ PAPERS = [
     ("Surrogate Gradient Learning in Spiking Neural Networks", "1901.09948", "Neuroscience"),
 ]
 
-# 图片列表保持不变
 IMAGES = [
     ("https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800", "animal_cat_01.jpg"),
     ("https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800", "animal_cat_02.jpg"),
@@ -171,23 +168,21 @@ def main():
     print(f"📂 Setup directories in: {DOWNLOAD_DIR}")
     print("-" * 50)
 
-    # 1. 准备 Ground Truth 字典
     ground_truth = {}
 
     print(f"📄 Starting PDF download ({len(PAPERS)} papers)...")
     pdf_count = 0
     for title, arxiv_id, category in PAPERS:
-        # 处理 arxiv URL
+
         if "arxiv" in arxiv_id or "/" in arxiv_id:
              pass
         url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
         
-        # 清理文件名
+
         safe_title = "".join([c if c.isalnum() or c in " .-_" else "" for c in title])
         filename = f"{safe_title}.pdf"
         filepath = os.path.join(PDF_DIR, filename)
-        
-        # 记录 Ground Truth (不管文件是否已存在，都要记录)
+
         ground_truth[filename] = category
 
         if os.path.exists(filepath):
@@ -199,15 +194,13 @@ def main():
         if download_file(url, filepath):
             pdf_count += 1
             time.sleep(1)
-    
-    # 2. 保存 Ground Truth 到文件
+
     with open(GT_FILE, 'w', encoding='utf-8') as f:
         json.dump(ground_truth, f, indent=4, ensure_ascii=False)
     print(f"\n✅ Ground Truth saved to: {GT_FILE}")
 
     print("-" * 50)
 
-    # 图片下载逻辑不变
     print(f"🖼️  Starting Image download ({len(IMAGES)} images)...")
     img_count = 0
     for url, save_name in IMAGES:

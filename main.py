@@ -1,14 +1,12 @@
 import os
 
-# ================= 显卡配置 =================
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-# ===========================================
 
 import argparse
 import uuid
 import json
 from tqdm import tqdm
-from src.config import PAPERS_DIR, IMAGES_DIR, GT_FILE # 确保 config 导出 GT_FILE
+from src.config import PAPERS_DIR, IMAGES_DIR, GT_FILE
 from src.models import ModelManager
 from src.database import VectorDB
 from src.utils import extract_text_from_pdf, load_image, copy_file, get_files_in_directory

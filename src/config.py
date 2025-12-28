@@ -1,7 +1,6 @@
 import os
 import torch
 
-# ================= 基础路径 =================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DB_PATH = os.path.join(DATA_DIR, "chroma_db")
@@ -9,23 +8,19 @@ PAPERS_DIR = os.path.join(DATA_DIR, "papers")
 IMAGES_DIR = os.path.join(DATA_DIR, "images")
 
 DOWNLOAD_BASE = os.path.join(BASE_DIR, "test_downloads")
-# 新增 Ground Truth 路径
 GT_FILE = os.path.join(DOWNLOAD_BASE, "ground_truth.json")
 
 os.makedirs(DB_PATH, exist_ok=True)
 os.makedirs(PAPERS_DIR, exist_ok=True)
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
-# ================= 硬件配置 =================
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"🚀 Running on device: {DEVICE}")
 
-# ================= 模型配置 =================
 TEXT_EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2" 
 CLIP_MODEL_ID = "openai/clip-vit-large-patch14"
 LLM_MODEL_ID = "Qwen/Qwen3-4B-Instruct-2507"
 
-# ================= 标签定义 (含 NLP) =================
 LABEL_DEFINITIONS = {
     "Computer Vision": (
         "Research focused on enabling computers to interpret and understand visual information from the world. "

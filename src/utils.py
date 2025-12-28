@@ -1,4 +1,4 @@
-import fitz  # PyMuPDF
+import fitz
 from PIL import Image
 import os
 import shutil
