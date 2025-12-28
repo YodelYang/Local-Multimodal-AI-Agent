@@ -1,0 +1,26 @@
+rm -rf test_downloads/raw_images/*
+rm -rf test_downloads/raw_pdfs/*
+rm -rf test_downloads/single_pdf/*
+
+python download_test_data.py
+python download_single_test_data.py
+
+rm -rf data/chroma_db
+rm -rf data/papers/*
+rm -rf data/images/*
+
+python main.py organize_folder "/amax/home/dywang/course_work/Multimodal/LocalAI_Agent/test_downloads/raw_pdfs" --topics "Reinforcement Learning,Natural Language Processing,Large Language Models,Computer Vision,AI Generated Content,Physics,Biology,Finance,Neuroscience"
+
+python main.py add_paper "/amax/home/dywang/course_work/Multimodal/LocalAI_Agent/test_downloads/single_pdf/GPT-4 Technical Report.pdf" --topics "Reinforcement Learning,Large Language Models,Computer Vision,AI Generated Content,Physics,Biology,Finance,Neuroscience"
+
+python main.py search_paper "How does the attention mechanism work?"
+python main.py search_paper "Detection of gravitational waves"
+
+
+
+python main.py index_images "/amax/home/dywang/course_work/Multimodal/LocalAI_Agent/test_downloads/raw_images"
+
+python main.py search_image "A cute cat"
+python main.py search_image "A dog"
+python main.py search_image "A city view"
+python main.py search_image "Something related to computer science"

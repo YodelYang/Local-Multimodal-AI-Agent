@@ -1,0 +1,12 @@
+torch
+torchvision
+transformers
+sentence-transformers
+accelerate
+chromadb
+pymupdf
+pillow
+tqdm
+scipy
+numpy
+requests
